@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            height: 100vh;
+        }
+
+        #main {
+            height: 100%;
+            width: 100%;
+            background-color: #111;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #cursor {
+            height: 34px;
+            width: 34px;
+            background-color: #fff;
+            border-radius: 50%;
+            position: fixed;
+            z-index: 10;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #imageDiv {
+            background-image: url('');
+            height: 750px;
+            width: 1170px;
+            position: relative;
+        }
+
+        .overlay {
+            height: 750px;
+            width: 100%;
+            background-color: transparent;
+            position: absolute;
+            z-index: 11;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="cursor"></div>
+    <div id="main">
+        <div id="imageDiv">
+            <div class="overlay"></div>
+            <img src="https://images.unsplash.com/photo-1750668251415-bd40b8154f45?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                alt="">
+        </div>
+
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js"
+        integrity="sha512-NcZdtrT77bJr4STcmsGAESr06BYGE8woZdSdEgqnpyqac7sugNO+Tr4bGwGF3MsnEkGKhU2KL2xh6Ec+BqsaHA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        let main = document.getElementById('main')
+        let cursor = document.getElementById('cursor')
+        let imageDiv = document.getElementById('imageDiv')
+
+        main.addEventListener('mousemove', (dets) => {
+            gsap.to(cursor, {
+                x: dets.x,
+                y: dets.y,
+                duration: 0.3,
+                ease: "power1.out",
+            })
+        })
+
+        imageDiv.addEventListener('mouseenter', (dets) => {
+            cursor.innerHTML = "💖"
+            gsap.to(cursor, {
+                scale: 3,
+                backgroundColor: "transparent",
+                ease: "none",
+                duration: 0
+            })
+        })
+
+        imageDiv.addEventListener('mouseleave', (dets) => {
+            cursor.innerHTML = ""
+            gsap.to(cursor, {
+                scale: 1,
+                backgroundColor: "#fff",
+                duration: 0
+            })
+        })
+
+    </script>
+</body>
+
+</html>
